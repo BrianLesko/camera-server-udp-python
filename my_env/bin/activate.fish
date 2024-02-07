@@ -33,7 +33,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/brianlesko/Documents/Sandbox/Camera-server/my_env"
+set -gx VIRTUAL_ENV "/Users/brianlesko/Documents/Sandbox/camera-server-udp-python/my_env"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH

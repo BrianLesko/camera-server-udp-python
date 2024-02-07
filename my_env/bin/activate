@@ -38,7 +38,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/brianlesko/Documents/Sandbox/Camera-server/my_env"
+VIRTUAL_ENV="/Users/brianlesko/Documents/Sandbox/camera-server-udp-python/my_env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"
