@@ -4,6 +4,7 @@
 import numpy as np
 import cv2 # pip install opencv-python-headless
 import socket
+import pickle
 
 camera = cv2.VideoCapture(0) # on a mac you can use either your mac webcam or an iphone camera using continuity camera! for me, my iphone was (1) and my mac webcam was (0)
 # Limit the size and FPS to increase speed
@@ -12,7 +13,7 @@ camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
 camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
 camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG')) # compression method
 
-def get_frame(): # we pass in time to make sure the cache is updated every call
+def get_frame(): 
     global camera
     try: 
         _, frame = camera.read()
@@ -31,16 +32,21 @@ def main():
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
     print('Host:', host_ip)
+    server.bind((host_ip, 8000))  # Bind the socket to a specific address
+
+    client_address = ('127.0.0.1', 8001)  # Replace with the client's IP address and port
 
     while True:
-        data = get_frame()
-        #cv2.imshow('Live Camera Feed',data)
-        if cv2.waitKey(1) & 0xFF == ord('q'):  # add a way to break the loop
-            break
-        # send data
-        server.sendto(data, ('192.168.1.75', 12345))
+        frame = get_frame()
+        #data = pickle.dumps(frame)
+        data = cv2.imencode('.jpg', frame)[1].tobytes()
 
-    camera.release()
-    cv2.destroyAllWindows()
+        # Split the data into chunks
+        chunk_size = 500  # Maximum UDP packet size
+        for i in range(0, len(data), chunk_size):
+            chunk = data[i:i+chunk_size]
+            server.sendto(chunk, client_address)
+        #print("frame sent", len(data))
+        server.sendto(b'END', client_address)  # send an empty chunk to signal the end of the frame
         
 main() 
