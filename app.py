@@ -31,15 +31,14 @@ def main():
     host_name = socket.gethostname()
     host_ip = socket.gethostbyname(host_name)
     print('Host:', host_ip)
-    port = 8502
 
     while True:
         data = get_frame()
-        cv2.imshow('Live Camera Feed',data)
+        #cv2.imshow('Live Camera Feed',data)
         if cv2.waitKey(1) & 0xFF == ord('q'):  # add a way to break the loop
             break
         # send data
-        server.sendto(data, (host_ip, port))
+        server.sendto(data, ('192.168.1.75', 12345))
 
     camera.release()
     cv2.destroyAllWindows()
