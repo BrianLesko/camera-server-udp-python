@@ -6,8 +6,6 @@ The transmission latency is better than my previous HTTP streaming project
 
 &nbsp;
 
-<div align="center"><img src="docs/preview.png" width="800"></div>
-
 &nbsp;
 
 ## Dependencies
