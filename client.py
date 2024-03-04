@@ -12,7 +12,7 @@ image_spot = st.empty()
 client = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Bind the client to a specific address (optional)
-client_address = ('localhost', 8001)  # Replace with the client's IP address and port
+client_address = ('172.20.10.2', 8001)  # Replace with the client's IP address and port
 client.bind(client_address)
 print('Client is listening at', client_address)
 
