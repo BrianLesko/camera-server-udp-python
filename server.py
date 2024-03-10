@@ -34,7 +34,7 @@ def main():
     print('Host:', host_ip)
     server.bind((host_ip, 8000))  # Bind the socket to a specific address
 
-    client_address = ('127.0.0.1', 8001)  # Replace with the client's IP address and port
+    client_address = ('127.0.0.1', 8000)  # Replace with the client's IP address and port
 
     while True:
         frame = get_frame()
