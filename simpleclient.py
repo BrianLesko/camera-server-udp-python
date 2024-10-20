@@ -1,13 +1,6 @@
-
-# display the image in the client using streamlit web browser
-
 import socket
 import cv2
 import numpy as np
-import streamlit as st
-
-col1, col2, col3 = st.columns([1,9,1])
-with col2: image_spot = st.empty()
 
 # Create a UDP socket
 print("getting ready to create a socket")
@@ -19,19 +12,23 @@ client.bind(client_address)
 print('Client is listening at', client_address)
 
 data = b''  # initialize the data variable
+buffer_size = 65536  # Set a more reasonable buffer size
+
 while True:
-    chunk, addr = client.recvfrom(90000)
+    chunk, addr = client.recvfrom(buffer_size)
     if chunk == b'END':  # check for the "END" delimiter
-        try: 
+        try:
             frame = cv2.imdecode(np.frombuffer(data, np.uint8), cv2.IMREAD_COLOR)
             # show the image
-            with image_spot:
-                st.image(frame, channels="BGR", width=800)  # Set the width to the desired value
-        except:
-            print('Error deserializing the frame')
-            data = b''
+            cv2.imshow('Frame', frame)
+            if cv2.waitKey(1) & 0xFF == ord('q'):
+                break
+        except Exception as e:
+            print('Error deserializing the frame:', e)
         data = b''  # reset the data for the next frame
     else:
         data += chunk
 
-
+# Release resources
+cv2.destroyAllWindows()
+client.close()

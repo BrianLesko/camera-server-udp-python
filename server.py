@@ -8,16 +8,16 @@ import pickle
 
 camera = cv2.VideoCapture(0) # on a mac you can use either your mac webcam or an iphone camera using continuity camera! for me, my iphone was (1) and my mac webcam was (0) 
 # Limit the size and FPS to increase speed
-camera.set(cv2.CAP_PROP_FPS, 24) # FPS
-camera.set(cv2.CAP_PROP_FRAME_WIDTH, 640)
-camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 480)
+camera.set(cv2.CAP_PROP_FPS, 60) # FPS
+camera.set(cv2.CAP_PROP_FRAME_WIDTH, 720)
+camera.set(cv2.CAP_PROP_FRAME_HEIGHT, 600)
 camera.set(cv2.CAP_PROP_FOURCC, cv2.VideoWriter_fourcc(*'MJPG')) # compression method
 
 def get_frame(): 
     global camera
     try: 
         _, frame = camera.read()
-        #frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
         frame = cv2.flip(frame, 1)  # this line flips the image
         return frame
     except:
