@@ -4,7 +4,6 @@
 import numpy as np
 import cv2 # pip install opencv-python-headless
 import socket
-import pickle
 
 camera = cv2.VideoCapture(0) # on a mac you can use either your mac webcam or an iphone camera using continuity camera! for me, my iphone was (1) and my mac webcam was (0) 
 # Limit the size and FPS to increase speed
