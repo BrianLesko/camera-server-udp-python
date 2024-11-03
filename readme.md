@@ -16,6 +16,14 @@ This code uses the following libraries:
 - `numpy`: for creating efficient arrays
 
 &nbsp;
+
+## Usage
+
+1. Clone the repo on your server and client devices
+2. Create a virtual environment, activate it, and install dependencies
+3. Run the client device first, the IP will be printed
+4. Start the Server and pass in the client IP
+
 &nbsp;
 
 <hr>
