@@ -1,5 +1,7 @@
 
 # Live Camera feed
+
+Meant for USB cameras or laptop webcams, CV2 autoamtically detects.
 Broadcast a live camera feed and pick it up from a computer that can run the client.py file & must be connected to the same LAN network.
 
 The transmission latency is better than my previous HTTP streaming project
